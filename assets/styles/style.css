@@ -20,6 +20,8 @@ h1 {
     margin-bottom: 20px;
 }
 
+/* Cards */
+
 #cards-container {
     display: flex;
     flex-wrap: wrap;
@@ -49,4 +51,20 @@ h1 {
 .card p {
     margin: 5px 0;
     font-size: 14px;
+}
+
+/* Paginação */
+
+#pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+#pagination button {
+    padding: 6px 12px;
+    font-weight: bold;
+    cursor: pointer;
 }
