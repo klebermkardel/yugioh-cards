@@ -30,7 +30,31 @@ fetch('https://db.ygoprodeck.com/api/v7/cardinfo.php')
                 // Adiciona o card ao container
                 cardsContainer.appendChild(cardElement);
             });
-        }  
+        }
+        
+        allCards = data.data;
+        renderCards();
+        upadatePageInfo();
+
+        document.getElementById('prevBtn').addEventListener('click', () => {
+            if(currentPage > 1) {
+                currentPage--;
+                renderCards();
+                upadatePageInfo();
+            }
+        });
+
+        document.getElementById('nextBtn').addEventListener('click', () => {
+            if(currentPage < Math.ceil(allCards.length / cardsPerPage)) {
+                currentPage++;
+                renderCards();
+                upadatePageInfo();
+            }
+        });
+
+        function upadatePageInfo() {
+            document.getElementById('pageInfo').textContent = `Página ${currentPage} de ${Math.ceil(allCards.length / cardsPerPage)}`;
+        };
     })
     .catch(error => {
         console.error('Erro ao buscar dados da API:', error); // Exibe mensagem de erro caso retorne algum erro ao buscar dados da API
