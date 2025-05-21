@@ -9,6 +9,25 @@
 <body>
   <h1>Yu-Gi-Oh! Cards</h1>
   <input type="text" id="searchInput" placeholder="Buscar carta por nome...">
+  <div id="filters">
+  <select id="typeFilter">
+    <option value="all">Todos os tipos</option>
+    <option value="monster">Monstro</option>
+    <option value="spell">Magia</option>
+    <option value="trap">Armadilha</option>
+  </select>
+
+  <select id="attributeFilter">
+    <option value="all">Todos os atributos</option>
+    <option value="LIGHT">Luz</option>
+    <option value="DARK">Trevas</option>
+    <option value="EARTH">Terra</option>
+    <option value="WATER">Água</option>
+    <option value="FIRE">Fogo</option>
+    <option value="WIND">Vento</option>
+    <option value="DIVINE">Divino</option>
+  </select>
+</div>
   <div id="cards-container"></div>
   <div id="pagination">
     <button id="prevBtn">Anterior</button>
