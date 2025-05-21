@@ -2,22 +2,25 @@ fetch('https://db.ygoprodeck.com/api/v7/cardinfo.php')
     .then(response => response.json())
     .then(data => {
         const cardsContainer = document.getElementById('cards-container');
-        const card = data.data[0];
+        cardsContainer.innerHTML = ''; // Limpa antes de inserir
 
-        // Cria um elemento div para o card
-        const cardElement = document.createElement('div');
-        cardElement.classList.add('card');
 
-        // Insere conteúdo HTML no card
-        cardElement.innerHTML = `
-        <img src="${card.card_images[0].image_url}" alt="${card.name}" />
-        <h2>${card.name}</h2>
-        <p><strong>ATK:</strong> ${card.atk} | <strong>DEF:</strong> ${card.def}</p>
-        <p>${card.desc}</p>
-        `;
+        data.data.forEach(card => {
+            // Cria um elemento div para o card
+            const cardElement = document.createElement('div');
+            cardElement.classList.add('card');
 
-        // Adiciona o card ao container
-        cardsContainer.appendChild(cardElement);
+            // Insere conteúdo HTML no card
+            cardElement.innerHTML = `
+            <img src="${card.card_images[0].image_url}" alt="${card.name}" />
+            <h2>${card.name}</h2>
+            <p><strong>ATK:</strong> ${card.atk} | <strong>DEF:</strong> ${card.def}</p>
+            <p>${card.desc}</p>
+            `;
+
+            // Adiciona o card ao container
+            cardsContainer.appendChild(cardElement);
+        });
     })
     .catch(error => {
         console.error('Erro ao buscar dados da API:', error); // Exibe mensagem de erro caso retorne algum erro ao buscar dados da API
