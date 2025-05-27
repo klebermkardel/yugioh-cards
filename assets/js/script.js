@@ -56,6 +56,7 @@ fetch('https://db.ygoprodeck.com/api/v7/cardinfo.php')
             const searchTerm = document.getElementById('searchInput').value.toLowerCase();
             const typeFilter = document.getElementById('typeFilter').value;
             const attributeFilter = document.getElementById('attributeFilter').value;
+            const levelFilter = document.getElementById('levelFilter').value;
 
             filteredCards = allCards.filter(card => {
                 const matchSearch = card.name.toLowerCase().includes(searchTerm) || card.desc?.toLowerCase().includes(searchTerm);
@@ -75,7 +76,13 @@ fetch('https://db.ygoprodeck.com/api/v7/cardinfo.php')
                     matchAttribute = card.attribute && card.attribute === attributeFilter;
                 }
 
-                return matchSearch && matchType && matchAttribute;
+                let matchLevel = true;
+                if (levelFilter !== 'all') {
+                    const cardLevel = card.level ?? card.linkval ?? card.rank ?? null;
+                    matchLevel = cardLevel !== null && cardLevel == levelFilter;
+                }
+
+                return matchSearch && matchType && matchAttribute && matchLevel;
             });
 
             currentPage = 1;
@@ -96,6 +103,8 @@ const searchInput = document.getElementById('searchInput');
 searchInput.addEventListener('input', debounce(applyFilters, 300));
         document.getElementById('typeFilter').addEventListener('change', applyFilters);
         document.getElementById('attributeFilter').addEventListener('change', applyFilters);
+        document.getElementById('levelFilter').addEventListener('change', applyFilters);
+
 
         // Paginação
         document.getElementById('prevBtn').addEventListener('click', () => {
