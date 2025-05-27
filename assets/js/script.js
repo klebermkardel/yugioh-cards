@@ -84,7 +84,16 @@ fetch('https://db.ygoprodeck.com/api/v7/cardinfo.php')
         }
 
         // Eventos para os filtros e busca
-        document.getElementById('searchInput').addEventListener('input', applyFilters);
+        const debounce = (func, delay) => {
+            let timeoutId;
+            return (...args) => {
+                clearTimeout(timeoutId);
+                timeoutId = setTimeout(() => func(...args), delay);
+            };
+        };
+
+const searchInput = document.getElementById('searchInput');
+searchInput.addEventListener('input', debounce(applyFilters, 300));
         document.getElementById('typeFilter').addEventListener('change', applyFilters);
         document.getElementById('attributeFilter').addEventListener('change', applyFilters);
 
