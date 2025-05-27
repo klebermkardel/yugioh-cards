@@ -58,7 +58,7 @@ fetch('https://db.ygoprodeck.com/api/v7/cardinfo.php')
             const attributeFilter = document.getElementById('attributeFilter').value;
 
             filteredCards = allCards.filter(card => {
-                const matchSearch = card.name.toLowerCase().includes(searchTerm);
+                const matchSearch = card.name.toLowerCase().includes(searchTerm) || card.desc?.toLowerCase().includes(searchTerm);
 
                 let matchType = true;
                 if (typeFilter === 'monster') {
