@@ -3,7 +3,7 @@
 Aplicação front-end que consome a API oficial de Yu-Gi-Oh para exibir todos os cards do jogo de forma dinâmica. O sistema mostra imagem, nome, ataque (ATK), defesa (DEF), descrição e várias outras funcionalidades. Desenvolvido com HTML, CSS e JavaScript puro.
 
 ## 🔍 Demonstração
-(Adicione aqui o link para a demo, se publicar no GitHub Pages)
+[Yu-Gi-Oh! Cards](https://klebermkardel.github.io/yugioh-cards/)
 
 ---
 
