@@ -41,6 +41,7 @@ fetch('https://db.ygoprodeck.com/api/v7/cardinfo.php')
                     <h2>${card.name}</h2>
                     ${atkDefHtml}
                     <p>${card.desc}</p>
+                    <button class="favorite-btn" data-id="${card.id}" title="Favoritar">&#9734;</button>
                 `;
 
                 // Adiciona o evento de clique ao card
