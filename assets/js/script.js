@@ -82,6 +82,27 @@ fetch('https://db.ygoprodeck.com/api/v7/cardinfo.php')
                     matchLevel = cardLevel !== null && cardLevel == levelFilter;
                 }
 
+                 const sortFilter = document.getElementById('sortFilter').value;
+
+                if (sortFilter !== 'none') {
+                const [key, order] = sortFilter.split('-');
+
+                filteredCards.sort((a, b) => {
+                    let valA = a[key] ?? 0;
+                    let valB = b[key] ?? 0;
+
+                    // Se for nome, converte para lowercase
+                    if (key === 'name') {
+                    valA = valA.toLowerCase();
+                    valB = valB.toLowerCase();
+                    }
+
+                    if (valA < valB) return order === 'asc' ? -1 : 1;
+                    if (valA > valB) return order === 'asc' ? 1 : -1;
+                    return 0;
+                });
+                }
+
                 return matchSearch && matchType && matchAttribute && matchLevel;
             });
 
@@ -99,11 +120,12 @@ fetch('https://db.ygoprodeck.com/api/v7/cardinfo.php')
             };
         };
 
-const searchInput = document.getElementById('searchInput');
-searchInput.addEventListener('input', debounce(applyFilters, 300));
-        document.getElementById('typeFilter').addEventListener('change', applyFilters);
-        document.getElementById('attributeFilter').addEventListener('change', applyFilters);
-        document.getElementById('levelFilter').addEventListener('change', applyFilters);
+        const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', debounce(applyFilters, 300));
+            document.getElementById('typeFilter').addEventListener('change', applyFilters);
+            document.getElementById('attributeFilter').addEventListener('change', applyFilters);
+            document.getElementById('levelFilter').addEventListener('change', applyFilters);
+            document.getElementById('sortFilter').addEventListener('change', applyFilters);
 
 
         // Paginação
