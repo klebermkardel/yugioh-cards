@@ -199,16 +199,3 @@ h1 {
   margin: 5px 0;
   font-size: 16px;
 }
-
-.favorite-btn {
-  background: none;
-  border: none;
-  font-size: 30px;
-  cursor: pointer;
-  color: gold;
-  float: right;
-}
-
-.favorite-btn.favorited {
-  color: orange;
-}
