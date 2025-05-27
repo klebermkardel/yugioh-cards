@@ -43,9 +43,42 @@ fetch('https://db.ygoprodeck.com/api/v7/cardinfo.php')
                     <p>${card.desc}</p>
                 `;
 
+                // Adiciona o evento de clique ao card
+                cardElement.addEventListener('click', () => showCardModal(card));
+
                 cardsContainer.appendChild(cardElement);
             });
         }
+
+        function showCardModal(card) {
+            const modal = document.getElementById('cardModal');
+            const modalBody = document.getElementById('modalBody');
+
+            modalBody.innerHTML = `
+                <img src="${card.card_images[0].image_url}" alt="${card.name}">
+                <h2>${card.name}</h2>
+                <p><strong>Tipo:</strong> ${card.type}</p>
+                <p><strong>Atributo:</strong> ${card.attribute ?? 'N/A'}</p>
+                <p><strong>Nível:</strong> ${card.level ?? 'N/A'}</p>
+                <p><strong>ATK:</strong> ${card.atk ?? 'N/A'}</p>
+                <p><strong>DEF:</strong> ${card.def ?? 'N/A'}</p>
+                <p><strong>Descrição:</strong> ${card.desc}</p>
+            `;
+
+            modal.style.display = 'block';
+            }
+
+            document.querySelector('.close').addEventListener('click', () => {
+            document.getElementById('cardModal').style.display = 'none';
+            });
+
+            window.addEventListener('click', (e) => {
+            const modal = document.getElementById('cardModal');
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
 
         function updatePageInfo(cards) {
             document.getElementById('pageInfo').textContent = `Página ${currentPage} de ${Math.ceil(cards.length / cardsPerPage)}`;
